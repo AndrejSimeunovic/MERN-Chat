@@ -16,7 +16,7 @@ connectDB();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ credentials: true, origin: "https://mern-chat-frontend-ten.vercel.app" }));
+app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
@@ -85,7 +85,7 @@ const usersOnline = new Map();
 
 const io = socket(server, {
   cors: {
-    origin: "https://mern-chat-frontend-ten.vercel.app",
+    origin: "http://localhost:5173",
     credentials: true,
   },
 });
