@@ -14,7 +14,7 @@ export default function Login() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/login",
+        "https://mern-chat-wheat.vercel.app/login",
         {
           username: usernameRef.current.value,
           password: passwordRef.current.value,

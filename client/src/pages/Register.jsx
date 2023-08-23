@@ -12,7 +12,7 @@ export default function Register() {
     e.preventDefault();
     try {
       await axios.post(
-        "http://localhost:5000/register",
+        "https://mern-chat-wheat.vercel.app/register",
         {
           username: usernameRef.current.value,
           password: passwordRef.current.value,
