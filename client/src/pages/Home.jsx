@@ -33,7 +33,7 @@ export default function Home() {
   useEffect(() => {
     const getAllusers = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/users", {
+        const response = await axios.get("https://mern-chat-wheat.vercel.app/users", {
           withCredentials: true,
         });
 
@@ -50,7 +50,7 @@ export default function Home() {
 
   useEffect(() => {
     if (username) {
-      const newSocket = io("http://localhost:5000");
+      const newSocket = io("https://mern-chat-wheat.vercel.app");
       setSocket(newSocket);
       newSocket.emit("add-user", username);
     }
@@ -73,7 +73,7 @@ export default function Home() {
   async function logout() {
     try {
       if (socket) socket.disconnect();
-      await axios.get("http://localhost:5000/logout", {
+      await axios.get("https://mern-chat-wheat.vercel.app/logout", {
         withCredentials: true,
       });
       toast.success("Logged out!");
