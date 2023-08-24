@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const socket = require("socket.io");
+const path = require("path");
 
 const PORT = process.env.PORT;
 const salt = bcrypt.genSaltSync(10);
@@ -19,9 +20,19 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 app.use(cookieParser());
 
-app.get("/", (req, res) => {
-  res.send("hello");
-});
+//-----------------Deployment
+const __dirname1 = path.resolve();
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname1, "../client/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname1,"..", "client", "dist", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("hello");
+  });
+}
+//-----------------Deployment
 
 app.post("/register", async (req, res) => {
   const { username, password } = req.body;
